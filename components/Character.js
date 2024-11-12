@@ -1,6 +1,7 @@
 import { View, Text, Image } from "react-native";
 
-export default function Character({ name, species, image }) {
+export default function Character(character) {
+    const { name, species, image } = character
     return (
         <View style={{
           gap: 8,

@@ -1,14 +1,16 @@
 import { FlatList, Pressable } from "react-native";
 import Character from "../components/Character";
+import { useNavigation } from "@react-navigation/core";
 
 
-const characters = [
+export const characters = [
     { id: 1, name: 'Rick Sanchez', species: 'Human', image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg'},
     { id: 2, name: 'Morty Smith', species: 'Human', image: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg'},
     { id: 3, name: 'Summer Smith', species: 'Human', image: 'https://rickandmortyapi.com/api/character/avatar/3.jpeg'},
 ]
 
 export default function Characters() {
+    const navigation = useNavigation()
     return (
         <FlatList       
         contentInsetAdjustmentBehavior="automatic"
@@ -20,7 +22,9 @@ export default function Characters() {
         keyExtractor={(item)=>item.id}
         renderItem={({item})=>{
           return (
-            <Character {...item}/>
+            <Pressable onPress={()=>{ navigation.navigate('CharacterDetails') }}>
+                <Character {...item}/>
+            </Pressable>
           );
         }}
         ></FlatList>
