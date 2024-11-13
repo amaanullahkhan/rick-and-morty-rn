@@ -1,10 +1,10 @@
 import { View, Image, Text } from "react-native";
-import { characters } from "./Characters";
 import { useEffect } from "react";
+import { initialCharacters } from "../reducers/characters";
 
 export default function CharacterDetails({ navigation, route }) {
     const { index } = route.params
-    const { name, species, image } = characters[index]
+    const { name, species, image } = initialCharacters[index]
     useEffect(()=>{
         navigation.setOptions({ headerTransparent: true })
     }, [])

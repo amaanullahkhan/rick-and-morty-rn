@@ -2,15 +2,11 @@ import { FlatList, Pressable } from "react-native";
 import Character from "../components/Character";
 import { useNavigation } from "@react-navigation/core";
 import { useEffect } from "react";
+import { useCharacters } from "../reducers/characters";
 
-
-export const characters = [
-    { id: 1, name: 'Rick Sanchez', species: 'Human', image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg'},
-    { id: 2, name: 'Morty Smith', species: 'Human', image: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg'},
-    { id: 3, name: 'Summer Smith', species: 'Human', image: 'https://rickandmortyapi.com/api/character/avatar/3.jpeg'},
-]
 
 export default function Characters() {
+    const [characters] = useCharacters();
     const navigation = useNavigation()
     useEffect(()=>{
         navigation.setOptions({ title: 'Characters', headerLargeTitle: true })
@@ -27,7 +23,7 @@ export default function Characters() {
         renderItem={({item, index})=>{
           return (
             <Pressable onPress={() => { navigation.navigate('CharacterDetails', {index: index} ) }}>
-                <Character {...item}/>
+                <Character {...item}/>                
             </Pressable>
           );
         }}
