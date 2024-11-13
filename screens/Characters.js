@@ -1,6 +1,7 @@
 import { FlatList, Pressable } from "react-native";
 import Character from "../components/Character";
 import { useNavigation } from "@react-navigation/core";
+import { useEffect } from "react";
 
 
 export const characters = [
@@ -11,6 +12,9 @@ export const characters = [
 
 export default function Characters() {
     const navigation = useNavigation()
+    useEffect(()=>{
+        navigation.setOptions({ title: 'Characters', headerLargeTitle: true })
+    }, [])
     return (
         <FlatList       
         contentInsetAdjustmentBehavior="automatic"

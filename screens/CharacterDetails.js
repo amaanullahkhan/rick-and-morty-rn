@@ -1,8 +1,14 @@
 import { View, Image, Text } from "react-native";
 import { characters } from "./Characters";
+import { useNavigation } from "@react-navigation/core";
+import { useEffect } from "react";
 
 export default function CharacterDetails() {
     const {name, species, image} = characters[0]
+    const navigation = useNavigation()
+    useEffect(()=>{
+        navigation.setOptions({ headerTransparent: true })
+    }, [])
     return (
         <View>
             <Image 
