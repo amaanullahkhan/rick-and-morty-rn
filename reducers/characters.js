@@ -1,7 +1,19 @@
-import { useReducer } from "react"
+import { createContext, useContext, useMemo, useReducer } from "react"
+
+const CharactersContext = createContext([]);
+
+export function CharactersProvider({ children }) {
+    const [characters, dispatch] = useReducer(charactersReducer, initialCharacters)
+    const contextValue = useMemo(() => characters, [characters]);
+    return (
+        <CharactersContext.Provider value={contextValue}>
+            {children}
+        </CharactersContext.Provider>
+    )
+}
 
 export function useCharacters() {
-    return useReducer(charactersReducer, initialCharacters)
+    return useContext(CharactersContext)
 }
 
 export const charactersAction = {

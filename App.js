@@ -12,7 +12,7 @@ export default function App() {
       <Stack.Navigator screenOptions={{ title: '' }}>
         <Stack.Screen name='Characters' component={Characters}/>
         <Stack.Screen name='CharacterDetails' component={CharacterDetails}/>
-    </Stack.Navigator>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
