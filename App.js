@@ -10,8 +10,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ title: '' }}>
-        <Stack.Screen name='Characters' component={Characters} options={{ title: 'Characters', headerLargeTitle: true }}/>
-        <Stack.Screen name='CharacterDetails' component={CharacterDetails} options={{ headerTransparent: true }}/>
+        <Stack.Screen name='Characters' component={Characters}/>
+        <Stack.Screen name='CharacterDetails' component={CharacterDetails}/>
     </Stack.Navigator>
     </NavigationContainer>
   );

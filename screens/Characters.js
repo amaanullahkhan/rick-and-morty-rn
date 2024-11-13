@@ -23,10 +23,10 @@ export default function Characters() {
           gap: 8,
         }}
         data={characters}
-        keyExtractor={(item)=>item.id}
-        renderItem={({item})=>{
+        keyExtractor={(item) => item.id}
+        renderItem={({item, index})=>{
           return (
-            <Pressable onPress={()=>{ navigation.navigate('CharacterDetails') }}>
+            <Pressable onPress={() => { navigation.navigate('CharacterDetails', {index: index} ) }}>
                 <Character {...item}/>
             </Pressable>
           );
