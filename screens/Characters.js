@@ -12,11 +12,24 @@ export default function Characters() {
 }
 
 function CharactersPage() {
-    const characters = useCharacters();
+    const {characters, loadMore} = useCharacters();
     const navigation = useNavigation()
     useEffect(()=>{
         navigation.setOptions({ title: 'Characters', headerLargeTitle: true })
     }, [])
+
+    const handleEndReached = async () => {
+        console.log('End Reached')
+        if (loadMore) {
+            try {
+                await loadMore()
+            }
+            catch (error) {
+                console.error('Error loading more characters:', error);
+            }
+        }
+    }
+
     return (
         <FlatList       
         contentInsetAdjustmentBehavior="automatic"
@@ -34,6 +47,8 @@ function CharactersPage() {
             </RenderCharacter>
           );
         }}
+        onEndReached={handleEndReached}
+        onEndReachedThreshold={0.2}
         ></FlatList>
       );   
 }
