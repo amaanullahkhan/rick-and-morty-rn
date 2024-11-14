@@ -1,8 +1,10 @@
 import { FlatList, Pressable } from "react-native";
 import Character from "../components/Character";
-import { useNavigation } from "@react-navigation/core";
+import { useFocusEffect, useNavigation } from "@react-navigation/core";
 import React, { useEffect } from "react";
 import { CharactersProvider, useCharacters } from "../reducers/characters";
+import { resetCharacterDetails, setCharacterDetails } from "../reducers/characterDetailsSlice";
+import { useDispatch } from "react-redux";
 
 
 export default function Characters() {
@@ -12,11 +14,19 @@ export default function Characters() {
 }
 
 function CharactersPage() {
+    
     const {characters, loadMore} = useCharacters();
     const navigation = useNavigation()
+    const dispatch = useDispatch();
+
     useEffect(()=>{
         navigation.setOptions({ title: 'Characters', headerLargeTitle: true })
     }, [])
+
+    useFocusEffect(()=> {
+        console.log('focused characters screen')
+        dispatch(resetCharacterDetails())
+    })
 
     const handleEndReached = async () => {
         console.log('End Reached')
@@ -43,7 +53,10 @@ function CharactersPage() {
           return (
             <RenderCharacter 
                 item={item}
-                onPress={() => { navigation.navigate('CharacterDetails', {index: index} ) }}>                               
+                onPress={() => {
+                    dispatch(setCharacterDetails(item)) 
+                    navigation.navigate('CharacterDetails', {index: index} ) 
+                }}>                               
             </RenderCharacter>
           );
         }}

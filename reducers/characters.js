@@ -3,14 +3,17 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useReducer,
 const CharactersContext = createContext();
 
 export function CharactersProvider({ children }) {
+
     const [characters, dispatch] = useReducer(charactersReducer, [])
     const nextPage = useRef(null);
     const isLoading = useRef(false);
 
     const loadCharacters = useCallback(async () => {
         console.log('loadCharacters called')
+        
         if (isLoading.current) { return };
         isLoading.current = true;
+
         const url = nextPage.current === null ? 'https://rickandmortyapi.com/api/character' : nextPage.current
         const response = await fetch(url)
         if (response.ok) {
@@ -45,12 +48,6 @@ export function CharactersProvider({ children }) {
 export function useCharacters() {
     return useContext(CharactersContext)
 }
-
-export const initialCharacters = [
-    { id: 1, name: 'Rick Sanchez', species: 'Human', image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg'},
-    { id: 2, name: 'Morty Smith', species: 'Human', image: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg'},
-    { id: 3, name: 'Summer Smith', species: 'Human', image: 'https://rickandmortyapi.com/api/character/avatar/3.jpeg'},
-]
 
 function charactersReducer(characters, action) {
     switch (action.type) {
